@@ -1,28 +1,25 @@
+//todo: For better understanding of code please Install "Better Comments" extension into your vscode.😎
 require("dotenv").config();
 
 const { MongoClient } = require("mongodb");
-// For environment variables, see:
-// For environment variables, see:
+const uri = process.env.MONGODB_CLIENT_ID;
+const client = new MongoClient(uri);
 
-// database connection function
+//! database connection function. Start
 
 async function main() {
-  const uri = process.env.MONGODB_CLIENT_ID;
-
-  const client = new MongoClient(uri);
-
   try {
+    //todo: Client must be connected to MongoDB before any operations are performed
     await client.connect();
 
-    //  ----------------------- database Lists  Start ----------------------------------
+    //!  ----------------------- database Lists,  Start ----------------------------------
 
-    // Calling listDatabases on the client returns a list of all the available databases. Start
+    //todo: Calling listDatabases on the client returns a list of all the available databases. Start
     // await listDatabases(client);
-    // Calling listDatabases on the client returns a list of all the available databases. End
-    // ////////////////////////////////////////////////////////////////////////////////
+    //todo: Calling listDatabases on the client returns a list of all the available databases. End
 
     // ----------------------------------------------------------------------------------
-    // Calling single createDocument function , start
+    //todo: Calling single createDocument function , start
     // await createSingleListening(client, {
     //   name: "ALI",
     //   age: 18,
@@ -31,10 +28,9 @@ async function main() {
     //   rule: "no rule",
     //   status: "active",
     // });
-    // Calling single createDocument function , End
+    //todo: Calling single createDocument function , End
     // ----------------------------------------------------------------------------------
-    // ----------------------------------------------------------------------------------
-    // Calling Multiple createDocument function , start
+    //todo: Calling Multiple createDocument function , start
     // await createMultipleListening(client, [
     //   {
     //     name: "Habib",
@@ -61,20 +57,18 @@ async function main() {
     //     status: "active",
     //   },
     // ]);
-    // Calling single create document function , End
+    //todo: Calling single create document function , End
     // ----------------------------------------------------------------------------------
   } catch (e) {
     console.log(e);
   }
 }
 
-// call main function Start
+//! call main function Start
 main().catch((e) => console.error(e));
-// calling main function End
+//! calling main function End
 
-//  ----------------------- DataBase Lists.  Start ----------------------------------
-
-// DataBaseList Function started
+//!  ----------------------- All DataBase Lists.  Start ----------------------------------
 
 // async function listDatabases(client) {
 //   const databasesList = await client.db().admin().listDatabases();
@@ -83,16 +77,14 @@ main().catch((e) => console.error(e));
 
 //   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
 // }
-// DataBaseList Function End
 
-//  ----------------------- DataBaseList Function. End ----------------------------------
+//!  ----------------------- All DataBase List Function. End ----------------------------------
 
-//  ----------------------- Creating document To The mongoDB Collection. Start ----------------------------------
+//!  ----------------------- Creating Document To The MongoDB Collection. Start ----------------------------------
 
-// Creating single Document into MongoDB, Start
+//todo: For Creating single Document into MongoDB, Start
 
 // async function createSingleListening(client, newListening) {
-//   // first we need to get the collection from the database
 //   const result = await client
 //     .db("testing")
 //     .collection("habib")
@@ -100,9 +92,11 @@ main().catch((e) => console.error(e));
 //   console.log("new listen is created with the new id :", result.insertedId);
 // }
 
-// Creating single Document into MongoDB, End
+//todo: Creating single Document into MongoDB, End
 
-// Creating Multiple Document into MongoDB, Start
+// ! Multiple Collections to MongoDB
+
+//todo: Creating Multiple Document into MongoDB, Start
 // async function createMultipleListening(client, newListenings) {
 //   const result = await client
 //     .db("testing")
@@ -112,6 +106,6 @@ main().catch((e) => console.error(e));
 //   console.log("new listen is created with the following id :");
 //   console.log(result.insertedIds);
 // }
-// Creating Multiple Document into MongoDB, End
+//todo: Creating Multiple Document into MongoDB, End
 
-//  ----------------------- Creating Document To the MongoDB Collection End ----------------------------------
+//!  ----------------------- Creating Document To the MongoDB Collection End ----------------------------------
