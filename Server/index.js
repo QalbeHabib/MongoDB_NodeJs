@@ -20,7 +20,7 @@ async function main() {
 
     // ----------------------------------------------------------------------------------
     //todo: Calling single createDocument function , start
-    // await createSingleListening(client, {
+    // await createSingleListing(client, {
     //   name: "ALI",
     //   age: 18,
     //   height: 5.6,
@@ -31,7 +31,7 @@ async function main() {
     //todo: Calling single createDocument function , End
     // ----------------------------------------------------------------------------------
     //todo: Calling Multiple createDocument function , start
-    // await createMultipleListening(client, [
+    // await createMultipleListing(client, [
     //   {
     //     name: "Habib",
     //     age: 22,
@@ -59,6 +59,10 @@ async function main() {
     // ]);
     //todo: Calling single create document function , End
     // ----------------------------------------------------------------------------------
+
+    // todo: Calling findOneListingByName function , start
+    findOneListingByName(client, "Hassan");
+    // todo: Calling findOneListingByName function , End
   } catch (e) {
     console.log(e);
   }
@@ -84,12 +88,12 @@ main().catch((e) => console.error(e));
 
 //todo: For Creating single Document into MongoDB, Start
 
-// async function createSingleListening(client, newListening) {
+// async function createSingleListing(client, newlisting) {
 //   const result = await client
 //     .db("testing")
 //     .collection("habib")
-//     .insertOne(newListening);
-//   console.log("new listen is created with the new id :", result.insertedId);
+//     .insertOne(newlisting);
+//   console.log("new list is created with the new id :", result.insertedId);
 // }
 
 //todo: Creating single Document into MongoDB, End
@@ -97,15 +101,33 @@ main().catch((e) => console.error(e));
 // ! Multiple Collections to MongoDB
 
 //todo: Creating Multiple Document into MongoDB, Start
-// async function createMultipleListening(client, newListenings) {
+// async function createMultipleListing(client, newListings) {
 //   const result = await client
 //     .db("testing")
 //     .collection("habib")
-//     .insertMany(newListenings);
+//     .insertMany(newListings);
 
-//   console.log("new listen is created with the following id :");
+//   console.log("new list is created with the following id :");
 //   console.log(result.insertedIds);
 // }
 //todo: Creating Multiple Document into MongoDB, End
 
-//!  ----------------------- Creating Document To the MongoDB Collection End ----------------------------------
+//!  ----------------------- Creating Document To the MongoDB Collection, End ----------------------------------
+
+// ! ------------------------ query Function For Reading the single Listing from  Database's Collection , Start -------------------------------
+
+async function findOneListingByName(client, nameOfListing) {
+  const result = await client
+    .db("testing")
+    .collection("habib")
+    .findOne({ name: nameOfListing });
+
+  if (result) {
+    console.log(`Listing found with the following name : ${nameOfListing}`);
+    console.log(result);
+  } else {
+    console.log(`No listing found with the following name : ${nameOfListing}`);
+  }
+  // todo: Note, We can find Listing with any of the field's value like (id, age, height etc). in the collection, in this function we are finding with 'name'.
+}
+// ! ------------------------ query Function For Reading the single Listing from  Database's Collection , End -------------------------------
