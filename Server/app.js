@@ -1,50 +1,49 @@
 const mongoos = require("mongoose");
 
+const uri =
+  "mongodb+srv://root:root@cluster0.lmm3q.mongodb.net/testing?retryWrites=true&w=majority";
+
+// connecting mongoos to mongoDB Altas
 mongoos
-  .connect(
-    "mongodb+srv://root:root@cluster0.lmm3q.mongodb.net/testing?retryWrites=true&w=majority"
-  )
+  .connect(uri)
   .then(() => {
-    console.log("connection successful to mongoDB");
+    console.log("mongoos connection successfully established");
   })
   .catch((err) => {
-    console.log("error in connection to mongoDB", err);
+    console.log("mongoos connection failed", err);
   });
 
-//   createing a schema
-const newData = new mongoos.Schema({
+// Modal Schema for mongoDB Atlas
+const schamaData = new mongoos.Schema({
   name: String,
   age: Number,
   height: Number,
   favoriteFood: String,
   rule: String,
-  status: Boolean,
+  status: String,
 });
-// Schema End
 
-// creating a model / Collection
+// Model for mongoDB Atlas with -> mongoos.model("collection Name" , schema)
+const dataModel = new mongoos.model("hassan", schamaData);
 
-const newDataModel = mongoos.model("habibs", newData);
-
-// creating a document
-
-const dataDocumentFunction = async () => {
+// passing Document to the mongoDB Atlas database in specified collection name as above, "hassan"
+const CollectionFunction = async () => {
   try {
-    const newDataDocument = new newDataModel({
-      name: "Muhammad jabbar",
-      age: 40,
-      height: 6.0,
-      favoriteFood: "rice",
-      rule: ".net Developer",
-      status: true,
+    const dataCollection = new dataModel({
+      name: "Hassan",
+      age: 15,
+      height: 5.6,
+      favoriteFood: "pasta  ",
+      rule: "no rule",
+      status: "active",
     });
-
-    const result = await newDataDocument.save();
-
-    console.log(result);
+    // saving the Document to the mongoDB Atlas database in specified collection name as above, "hassan"
+    const result = await dataCollection.save();
+    // console.log(result);
   } catch (err) {
-    console.log(err);
+    console.log("error in CollectionFunction", err);
   }
 };
 
-dataDocumentFunction();
+// calling the CollectionFunction
+CollectionFunction();
