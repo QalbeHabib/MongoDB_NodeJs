@@ -1,78 +1,13 @@
 //todo: For better understanding of code please Install "Better Comments" extension into your vscode.😎
-require("dotenv").config();
-
-//
+// require("dotenv").config();
 
 const { MongoClient } = require("mongodb");
-const uri = process.env.MONGODB_CLIENT;
-console.log(uri);
+const uri =
+  "mongodb+srv://root:root@cluster0.lmm3q.mongodb.net/Netixsol?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
-//!  ----------------------- All DataBase Lists Function.  Start ----------------------------------
+console.log(uri);
 
-// async function listDatabases(client) {
-//   const databasesList = await client.db().admin().listDatabases();
-
-//   console.log("Databases:");
-
-//   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-// }
-
-//!  ----------------------- All DataBase List Function. End ----------------------------------
-
-//!  ----------------------- Creating Document To The MongoDB Collection. Start ----------------------------------
-
-//todo: For Creating single Document into MongoDB, Start
-
-// async function createSingleListing(client, newlisting) {
-//   const result = await client
-//     .db("testing")
-//     .collection("habib")
-//     .insertOne(newlisting);
-//   console.log("new list is created with the new id :", result.insertedId);
-// }
-
-//todo: Creating single Document into MongoDB, End
-
-// ! Multiple Collections to MongoDB
-
-//todo: Creating Multiple Document into MongoDB, Start
-// async function createMultipleListing(client, newListings) {
-//   const result = await client
-//     .db("testing")
-//     .collection("habib")
-//     .insertMany(newListings);
-
-//   console.log("new list is created with the following id :");
-//   console.log(result.insertedIds);
-// }
-//todo: Creating Multiple Document into MongoDB, End
-
-//!  ----------------------- Creating Document To the MongoDB Collection, End ----------------------------------
-
-// ! ------------------------ query  For Reading the single Listing from  Database's Collection , Start -------------------------------
-
-async function findOneListingByName(client, nameOfListing) {
-  const result = await client
-    .db("testing")
-    .collection("habib")
-    .findOne({ name: nameOfListing });
-
-  if (result) {
-    console.log(`Listing found with the following name : ${nameOfListing}`);
-    console.log(result);
-  } else {
-    console.log(`No listing found with the following name : ${nameOfListing}`);
-  }
-  // todo: Note, We can find Listing with any of the field's value like (id, age, height etc). in the collection, in this function we are finding with 'name'.
-}
-// ! ------------------------ query  For Reading the single Listing from  Database's Collection , End -------------------------------
-
-// ! ------------------------ query  For Reading the multiple Listings from  Database's Collection , Start -------------------------------
-
-// ! ------------------------ query  For Reading the multiple Listings from  Database's Collection , End -------------------------------
-
-// IN THE MAIN FUNCTION, WE ARE CALLING ALL THE UPPER FUNCTION TO PERFORM OPERATIONS.
 //! database connection function. Start
 
 async function main() {
@@ -87,15 +22,16 @@ async function main() {
     //todo: Calling listDatabases on the client returns a list of all the available databases. End
 
     // ----------------------------------------------------------------------------------
+
     //todo: Calling single createDocument function , start
-    // await createSingleListing(client, {
-    //   name: "ALI",
-    //   age: 18,
-    //   height: 5.6,
-    //   favoriteFood: "Burger",
-    //   rule: "no rule",
-    //   status: "active",
-    // });
+    await createSingleListing(client, {
+      name: "ALI",
+      age: 18,
+      height: 5.6,
+      favoriteFood: "Burger",
+      rule: "no rule",
+      status: "active",
+    });
     //todo: Calling single createDocument function , End
     // ----------------------------------------------------------------------------------
     //todo: Calling Multiple createDocument function , start
@@ -129,10 +65,8 @@ async function main() {
     // ----------------------------------------------------------------------------------
 
     // todo: Calling findOneListingByName function , start
-    // findOneListingByName(client, "Habib");
+    // findOneListingByName(client, "Hassan");
     // todo: Calling findOneListingByName function , End
-
-    // --------------------------------------------------------------------------------------
   } catch (e) {
     console.log(e);
   }
@@ -141,3 +75,65 @@ async function main() {
 //! call main function Start
 main().catch((e) => console.error(e));
 //! calling main function End
+
+//!  ----------------------- All DataBase Lists.  Start ----------------------------------
+
+// async function listDatabases(client) {
+//   const databasesList = await client.db().admin().listDatabases();
+
+//   console.log("Databases:");
+
+//   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
+// }
+
+//!  ----------------------- All DataBase List Function. End ----------------------------------
+
+//!  ----------------------- Creating Document To The MongoDB Collection. Start ----------------------------------
+
+//todo: For Creating single Document into MongoDB, Start
+
+async function createSingleListing(client, newlisting) {
+  const result = await client
+    .db("testing")
+    .collection("habib")
+    .insertOne(newlisting);
+  console.log("new list is created with the new id :", result.insertedId);
+}
+
+//todo: Creating single Document into MongoDB, End
+
+// ! Multiple Collections to MongoDB
+
+//todo: Creating Multiple Document into MongoDB, Start
+// async function createMultipleListing(client, newListings) {
+//   const result = await client
+//     .db("testing")
+//     .collection("habib")
+//     .insertMany(newListings);
+
+//   console.log("new list is created with the following id :");
+//   console.log(result.insertedIds);
+// }
+//todo: Creating Multiple Document into MongoDB, End
+
+//!  ----------------------- Creating Document To the MongoDB Collection, End ----------------------------------
+
+// ! ------------------------ query Function For Reading the single Listing from  Database's Collection , Start -------------------------------
+
+// async function findOneListingByName(client, nameOfListing) {
+//   const result = await client
+//     .db("testing")
+//     .collection("habib")
+//     .findOne({ name: nameOfListing });
+
+//   if (result) {
+//     console.log(`Listing found with the following name : ${nameOfListing}`);
+//     console.log(result);
+//   } else {
+//     console.log(`No listing found with the following name : ${nameOfListing}`);
+//   }
+// }
+// todo: Note, We can find Listing with any of the field's value like (id, age, height etc). in the collection, in this function we are finding with 'name'.
+// ! ------------------------ query Function For Reading the single Listing from  Database's Collection , End -------------------------------
+
+
